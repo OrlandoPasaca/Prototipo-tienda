@@ -1,0 +1,16 @@
+import {RouterModule,Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
+import { MovimientosComponent } from './movimientos.component';
+
+const routes:Routes=[
+    {
+        path:"",component:MovimientosComponent
+    }
+]
+@NgModule(
+    {
+        imports:[RouterModule.forChild(routes)],
+        exports:[RouterModule]
+    }
+)
+export class MovimientosRoutingModule{}

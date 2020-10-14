@@ -1,0 +1,138 @@
+<div class="container-fluid m-0 p-0">
+    <div class="row">
+        <div style="width: 14vw;">
+
+        </div>
+        <div style="width: 86vw;">
+            <div class="col">
+                <div class="row mt-4 p-3">
+                    <div class="col-6">
+                        <form [formGroup]="forma" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label for="my-input">Codigo de Barra</label>
+                                <input (keypress)="disabledEnter($event)" placeholder="Codigo de Barra" 
+                                class="form-control" 
+                                type="text" name=""
+                                autofocus
+                                autocomplete="off"
+                                formControlName="codigo_barras"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="my-input">Codigo de Producto</label>
+                                <input  placeholder="Codigo de producto" 
+                                 
+                                class="form-control" 
+                                type="text" 
+                                name=""
+                                autocomplete="off"
+                                formControlName="codigo_producto"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="my-input">Nombre Producto</label>
+                                <input  placeholder="Nombre Producto" 
+                                 class="form-control" 
+                                type="text" name=""
+                                autocomplete="off"
+                                readonly
+                                formControlName="nombre_producto"
+                                >
+                                <span *ngIf="campoInvalido(forma.get('nombre_producto'))" class="text-danger">Este campo es invalido</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="my-input">Precio Unitario</label>
+                                <input placeholder="Cantidad" 
+                                 class="form-control" 
+                                type="text" name=""
+                                autocomplete="off"
+                                readonly
+                                formControlName="precio_unitario"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="my-input">Cantidad</label>
+                                <input placeholder="Cantidad" 
+                                 class="form-control" 
+                                type="text" name=""
+                                autocomplete="off"
+                                formControlName="cantidad"
+                                >
+                                <span *ngIf="campoInvalido(forma.get('cantidad'))" class="text-danger">Este campo es invalido</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="my-input">Total</label>
+                                <input placeholder="Total" 
+                                 class="form-control" 
+                                type="text" name=""
+                                readonly
+                                autocomplete="off"
+                                formControlName="total"
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </form>
+                    </div>
+                    <form [formGroup]="formaCarrito" (ngSubmit)="clickPago()" class="col-6 p-0  border border-success border-radius-5 rounded">
+                    <div >
+                        <div class="row bg-success w-100 m-0 p-0">
+                            <div class="col-3 ">
+                                Codigo
+                            </div>
+                            <div class="col-3 ">
+                                Nombre
+                            </div>
+                            <div class="col-3 ">
+                                Cantidad
+                            </div>
+                            <div class="col-3 ">
+                                Precio x Und
+                            </div>
+                            
+                        </div>
+                        <div formArrayName="carrito" *ngFor="let prod of carrito;let i=index" class="row mt-2 flex-wrap m-0 p-0">
+                            <div  class="col-3 d-flex justify-content-end">
+                                {{prod.codigo_producto}}
+                            </div>
+                            <div class="col-3 d-flex justify-content-end">
+                                {{prod.nombre_producto}}
+                            </div>
+                            <div (dblclick)="editarcantidad(i)" class="col-3 d-flex justify-content-end">
+                                <input [formControlName]="i" (keypress)="disabledEnter($event)" class="form-control" (keyup.enter)="cambiarcantidad(i)" *ngIf="mostrarEdit[i].mostrar" [value]="prod.cantidad" type="text">
+                                <span role="button" *ngIf="!mostrarEdit[i].mostrar">{{prod.cantidad}}</span>
+                            </div>
+                            <div class="col-3 d-flex justify-content-end">
+                                S/.{{prod.precio_unitario}}
+                            </div>
+                            <div class="col-12 d-flex justify-content-between border-bottom">
+                                <i role="button" (click)="borrarProducto(i)" class="fas fa-trash-alt"></i><span>Total: S/.{{prod.total}}</span>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div *ngIf="carrito.length>0" class="row mt-2 flex-wrap m-0 p-0">
+                            <div class="col-12 d-flex justify-content-end">
+                                <span>Total a pagar: S/.{{pago_total}}</span>
+                            </div> 
+                        </div>
+
+                        <div *ngIf="carrito.length>0" class="row justify-content-center mt-2">
+                            <div class="col-10">
+                            <input formControlName="comentario" placeholder="Ingrese algun comentario" class="form-control" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <div class="row justify-content-end">
+                            <button *ngIf="carrito.length>0" (click)="limpiar()" type="button" class="btn btn-danger">Limpiar</button>
+                            <button *ngIf="carrito.length>0" type="submit" class="btn btn-success">Pagar</button>
+                        </div>
+                   </div>
+                </form>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>

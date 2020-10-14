@@ -1,0 +1,89 @@
+<div class="contenedor container-fluid">
+    <h1 class="row pt-4">
+        Registrar Productos
+    </h1>
+    <hr>
+    <form [formGroup]="forma" (ngSubmit)="onSubmit()" class="row flex-wrap">
+
+        <div class=" col-12 form-group mt-4">
+          <label for="exampleInputEmail1 ">Codigo de barras</label>
+          <input (keypress)="stop($event)" type="number" 
+          class="form-control"
+          formControlName="cod_barras"
+          [class.is-invalid]="codigoBarrasIncorrecto()"
+          autofocus
+          >
+          <small class="text-danger" *ngIf="codigoBarrasIncorrecto()">Este campo no puede estar vacio</small>
+        </div>
+        <div class="col-12 form-group">
+          <label for="exampleInputPassword1">Codigo de producto</label>
+          <input type="number" 
+          class="form-control"
+          formControlName="cod_producto"
+          >
+          <small >Este campo se generara automaticamente y solo es referencial, editelo manualmente si crea un codigo repetido</small>
+        </div>
+        <div class=" col-12 form-group">
+            <label for="exampleInputEmail1 ">Nombre de producto</label>
+            <input type="text" 
+            class="form-control"
+            formControlName="nombre_prod"
+            [class.is-invalid]="nombreProdIncorrecto()"
+            >
+            <small class="text-danger" *ngIf="nombreProdIncorrecto()">El nombre no puede comenzar ni terminar con espacios en blanco, ademas solo se aceptan letras y numeros</small>
+          </div>
+          <div class="col-12 form-group">
+            <label for="exampleInputPassword1">Precio de Compra</label>
+            <input style="-webkit-appearance: none;" type="number" 
+            class="form-control" 
+            step="0.01"
+             min="0"
+             formControlName="precio_compra"
+             [class.is-invalid]="precioCompraIncorrecto()"
+             >
+             <small class="text-danger" *ngIf="precioCompraIncorrecto()">Solo se aceptan numeros hasta con 2 decimales separados por "."</small>
+          </div>
+          <div class=" col-12 form-group">
+            <label for="exampleInputEmail1 ">Precio de Venta</label>
+            <input style="-webkit-appearance: none;" type="number"
+             class="form-control" 
+             step="0.01"
+             formControlName="precio_venta"
+             [class.is-invalid]="precioVentaIncorrecto()"
+             >
+             
+             <small class="text-danger" *ngIf="precioVentaIncorrecto()">Solo se aceptan numeros hasta con 2 decimales separados por "."</small>
+          </div>
+          <div class="col-12 form-group">
+            <label  for="exampleInputPassword1" >Ganancia</label>
+<!--         appGanancia (cambio)="onChange($event)" [ganancia]="forma.get('precio_venta').value-forma.get('precio_compra').value"
+ -->         <input  type="number"
+             class="form-control" 
+             step="0.01"
+             formControlName="ganancia"
+
+             >
+          </div>
+          <div class=" col-12 form-group ">
+              <label for="exampleInputEmail1 ">Stock</label>
+              <input style="-webkit-appearance: none;" type="number" 
+              class="form-control"
+              formControlName="stock"
+              [class.is-invalid]="stockIncorrecto()"
+              >
+              <small class="text-danger" *ngIf="stockIncorrecto()">Solo se aceptan numeros hasta con 2 decimales separados por "."</small>
+          </div>
+          <div class=" col-12 form-group ">
+            <label for="exampleInputEmail1 ">Estado</label>
+            <input style="-webkit-appearance: none;" type="number"
+             class="form-control"
+              value="3" 
+              readonly
+              formControlName="estado"
+              >
+          </div>
+        
+        <button  type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+</div>
+

@@ -1,0 +1,10 @@
+.contenedor
+{
+    position: relative;
+    margin-left: 15%;
+    width: 85%;
+}
+.separador{
+    position: relative;
+    margin-top: 10%;
+}

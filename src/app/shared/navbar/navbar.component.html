@@ -1,0 +1,33 @@
+<nav *ngIf="usuario.getItem('usuario')" style="width: 14vw;" class="position-fixed row min-vh-100 flex-column bg-primary">
+    <div class="col-12 d-flex justify-content-center flex-wrap m-0 pl-4 pr-4">
+        <div>
+        <img class="img-fluid mt-4 p-0" src="../../../assets/img/login.png">
+        </div>
+        <h1 class="m-0">{{usuario.getItem("usuario")}}</h1>
+        <small role="button" class="m-0 p-0" (click)="closeSession()">Cerrar sesion</small>
+    </div>
+    <div class="col-12">
+        <div routerLink="/home" role="button" class="row text-white mr-0 ml-1 mt-2">
+            Home      
+        </div>
+        <div routerLink="/consulta_productos" role="button" class="row text-white mr-0 ml-1 mt-2">
+            Consultar Producto      
+        </div>
+        <div routerLink="/ingresar_stock" role="button" class="row text-white mr-1 ml-1 mt-2">
+            Ingresar Stock
+        </div>
+        <div routerLink="/ajuste_stock" role="button" class="row text-white mr-0 ml-1 mt-2">
+            Ajuste Stock
+        </div>
+        <div routerLink="/movimientos" role="button" class="row text-white mr-1 ml-1 mt-2">
+            Movimientos
+        </div>
+        <div routerLink="/registro_productos" role="button" class="row text-white mr-0 ml-1 mt-2">
+            Registrar Producto
+        </div>
+        <div routerLink="/caja" role="button" class="row text-white mr-0 ml-1 mt-2">
+            Caja
+        </div>
+        
+    </div>
+</nav>

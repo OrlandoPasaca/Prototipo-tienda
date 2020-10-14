@@ -1,0 +1,45 @@
+<div *ngIf="!usuario.getItem('usuario')" class="container">
+<form class="row flex-wrap p-20" [formGroup]="forma" (ngSubmit)="onSubmit()" *ngIf="mostrarform">
+    <div class="w-100 separador"></div>
+    <div class=" col-12 form-group ">
+      <label for="exampleInputEmail1" >Usuario</label>
+      <input  
+      class="form-control" 
+      id="exampleInputEmail1" 
+      aria-describedby="emailHelp"
+      formControlName="usuario"
+      autocomplete="off"
+      [class.is-invalid]="usuarioInvalido"
+      >
+      <p *ngIf="usuarioConCaracteres" class="text-danger">El usuario no lleva caracteres ( $ , " , " , ! ,....)</p>
+      <p *ngIf="usuarioVacio" class="text-danger">Este campo es obligatorio</p>
+    </div>
+    <div  class=" col-12 form-group">
+      <label for="exampleInputPassword1" >Contraseña</label>
+      <div class="d-flex flex-nowrap align-items-center">
+      <input *ngIf="mostrarpass" type="text" 
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="contrasena"
+      [class.is-invalid]="contrasenaInvalida"
+      >
+      <input *ngIf="!mostrarpass" type="password" 
+      class="form-control"
+      id="exampleInputPassword1"
+      formControlName="contrasena"
+      [class.is-invalid]="contrasenaInvalida"
+      >
+      <i *ngIf="mostrarpass" (click)="cambiarestado()" class="fas fa-lock-open position-absolute" style="right: 2%;"></i>
+      <i *ngIf="!mostrarpass" (click)="cambiarestado()" class="fas fa-lock position-absolute" style="right: 2%;"></i>
+      </div>
+      <p *ngIf="contrasenaConCaracteres" class="text-danger">El usuario no lleva caracteres ($,",",!,....)</p>
+      <p *ngIf="contrasenaVacio" class="text-danger">Este campo es obligatorio</p>
+    </div>
+    <div class="col-12 form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Recordar</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+   
+  </form>
+</div>

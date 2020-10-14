@@ -1,0 +1,76 @@
+<div class="container-fluid m-0 p-0">
+    <div class="row">
+        <div style="width: 14vw;">
+        </div>
+        <div style="width: 86vw;" class="p-3">
+            <h1>Consultar Producto</h1>
+                <hr>
+        <form [formGroup]="forma" (ngSubmit)="onSubmit()">
+            <div class="row">
+                
+                <div class="form-group col-4">
+                    <label >Codigo de Barras</label>
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="Codigo de Barras"
+                    formControlName="codigo_barras"
+                    >
+                </div>
+                <div class="form-group col-4">
+                    <label>Codigo de Producto</label>
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="Codigo de Producto"
+                    formControlName="codigo_producto"
+                    >
+                </div>
+                <div class="form-group col-4">
+                    <label >Nombre de producto</label>
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="Nombre de producto"
+                    formControlName="nombre_prod"
+                    >
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <div class="row mt-4 p-4">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Cod. Barras</th>
+                    <th scope="col">Cod. Producto</th>
+                    <th scope="col">Nombre Prod.</th>
+                    <th scope="col">Precio Compra</th>
+                    <th scope="col">Precio Venta</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Estado</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="productos && !productos[0].no_prod && spinner==false">
+                  <tr *ngFor="let producto of productos">
+                    <th scope="row">{{producto.codigo_barras}}</th>
+                    <td>{{producto.codigo_producto}}</td>
+                    <td>{{producto.nombre_producto}}</td>
+                    <td>{{producto.precio_compra_actual}}</td>
+                    <td>{{producto.precio_venta_actual}}</td>
+                    <td>{{producto.stock_actual}}</td>
+                    <td>{{producto.estado}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="productos && productos[0].no_prod && spinner==false" class="col-12">
+                <div class="row justify-content-center">
+                  <p>No hay registros que mostrar</p>
+                </div>
+              </div>
+              <div *ngIf="spinner" class="col-12">
+                <div class="row justify-content-center">
+                  <i class="fas fa-sync-alt spinner_girar"></i>
+                </div>
+              </div>
+        </div>
+        </div>
+    </div>
+</div>
